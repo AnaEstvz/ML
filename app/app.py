@@ -5,33 +5,35 @@ import streamlit as st
 from PIL import Image 
 
 
-# Cargar el modelo con pickle
+
 pickle_in = open('../models_class/final_model2.pkl', 'rb') 
 modelo_rf = pickle.load(pickle_in) 
 
-# Configuración de la página de Streamlit
+
 st.set_page_config(page_title="Predicción de danzabilidad", page_icon=":music")
 
-# Sidebar con opciones
+
 seleccion = st.sidebar.selectbox("Selecciona una opción", ["Home", "Predicción"])
 
-# Página de inicio
+
 if seleccion == "Home":
     st.title("Predicción de la danzabilidad")
 
-    # Expansión con información sobre la aplicación
+    
     with st.expander("¿Qué es esta aplicación?"):
-        st.write("Es una primera aproximación para poder predecir cuáles son las canciones más bailables")
+        st.write("Es una primera aproximación para poder predecir cuáles son las canciones más bailables y de esta manera poder añadirlas a la lista de baile")
 
-    # Cargar imagen
+   
     img = Image.open('baile.jpg')
     st.image(img)
 
-# Página de predicción
+
 elif seleccion == "Predicción":
-    st.title("Empecemos a predecir")
+    st.title("¡Vamos a predecir la danceability de la canción!")
+
+    nombre_cancion = st.text_input("Ingresa el nombre de la canción")
     
-    # Interfaz para ingresar las variables predictoras
+    # Variables predictoras
     popularity = st.slider("Popularity", min_value=-60.0, max_value=0.0, value=-10.0)
     acousticness = st.slider("Energy", min_value=0.0, max_value=1.0, value=0.7)
     instrumentalness = st.slider("Instrumentalness", min_value=0.0, max_value=1.0, value=0.1)
@@ -40,9 +42,7 @@ elif seleccion == "Predicción":
     speechiness = st.slider("Speechiness", min_value=0.0, max_value=1.0, value=0.1)
     energy = st.slider("Energy", min_value=0.0, max_value=1.0, value=0.1)
     
-    # Aplicar las transformaciones
-
-
+    # Tranformaciones 
     loudness_category_numerica = 0 if -47.047 <= loudness < -15 else \
                                   1 if -15 <= loudness < -10 else \
                                   5 if -10 <= loudness < -5 else \
@@ -53,9 +53,6 @@ elif seleccion == "Predicción":
                                   6 if loudness_category_numerica == 4 or loudness_category_numerica == 1 else \
                                   9 if loudness_category_numerica == 5 else None
 
-    
-
- 
     speech_cat_num = 0 if speechiness < 0.05 else \
                       1 if 0.05 <= speechiness < 0.1 else \
                       2 if 0.1 <= speechiness < 0.15 else \
@@ -98,9 +95,7 @@ elif seleccion == "Predicción":
                       6 if energy_cat_num == 3 else \
                       7 if energy_cat_num == 2 else None
 
-    
-
-    # Crear dataframe con los valores transformados
+    # Dataframe con los valores transformados
     datos = pd.DataFrame({
         'popularity': [popularity],
         'acousticness': [acousticness],
@@ -109,19 +104,37 @@ elif seleccion == "Predicción":
         'loudness_category_numerica2': [loudness_category_numerica2],
         'speech_cat_num2': [speech_cat_num2],
         'energy_cat_num2': [energy_cat_num2]
-        
     })
 
-    # Realizar la predicción
+    # Hacemos la predicción
     prediccion = modelo_rf.predict(datos)
 
-    # Mostrar el resultado de la predicción
-   
+    # Resultado de la predicción
     st.write("Resultado de la predicción:")
     if prediccion[0] < 0.5:
         st.write("La canción tiene poca danceability.")
     else:
         st.write("La canción tiene mucha danceability.")
+
+    # Dataframe con los resultados de la predicción
+    df_resultado = pd.DataFrame({
+        'Nombre de la canción': [nombre_cancion],
+        'Popularity': [popularity],
+        'Acousticness': [acousticness],
+        'Instrumentalness': [instrumentalness],
+        'Valence': [valence],
+        'Loudness Category': [loudness_category_numerica2],
+        'Speechiness Category': [speech_cat_num2],
+        'Energy Category': [energy_cat_num2],
+        'Predicción': [prediccion[0]]
+    })
+
+    # Mostrar el dataframe con los resultados
+    st.write("Resultados de la predicción:")
+    st.write(df_resultado)
+
+
+
 
 
 
