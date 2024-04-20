@@ -107,14 +107,15 @@ elif seleccion == "Predicción":
     })
 
     # Hacemos la predicción
-    prediccion = modelo_rf.predict(datos)
+    if st.button("Predecir"):
+        prediccion = modelo_rf.predict(datos)
 
     # Resultado de la predicción
     st.write("Resultado de la predicción:")
     if prediccion[0] < 0.5:
-        st.write("La canción tiene poca danceability.")
+        st.write("La canción", nombre_cancion, "tiene poca danceability.")
     else:
-        st.write("La canción tiene mucha danceability.")
+        st.write("La canción", nombre_cancion, "tiene mucha danceability.")
 
     # Dataframe con los resultados de la predicción
     df_resultado = pd.DataFrame({
