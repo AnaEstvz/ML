@@ -1,7 +1,7 @@
 # Proyecto de Machine Learning: Predicción de Danceability en Canciones
 En este proyecto de Machine Learning, hemos adquirido un dataset de Kaggle que contiene información sobre diferentes parámetros asociados a canciones. El objetivo principal es predecir la danceability de las canciones utilizando técnicas de clasificación.
 
-![Texto alternativo]('../app/baile.jpg')
+![Texto alternativo]('app/baile.jpg')
 
 ## Descripción del Dataset
 El dataset contiene una variedad de características para cada canción, como popularidad, acústica, instrumentalidad, valencia, entre otros. Sin embargo, nos enfocamos en predecir la danceability de las canciones, que es nuestra variable objetivo. Danceability es una medida de qué tan adecuada es una pista para bailar, representada como un número entre 0 y 1.
@@ -27,12 +27,12 @@ Creamos una aplicación web utilizando Streamlit para permitir a los usuarios re
 
 
 ## Estructura del Repositorio
-data/: Carpeta que contiene el dataset original y los datos procesados. Así como, los datos de entrenamiento utilizados para entrenar el modelo, y los datos de test utilizados para evaluar el modelo a partir de los datos procesados.
-notebooks/: Carpeta que contiene los notebooks Jupyter utilizados en el proyecto.
-models/: Carpeta que contiene los modelos entrenados y el modelo final seleccionado.
-src/: Contiene los archivos fuente de Python que implementan las funcionalidades clave del proyecto.
-app/: Contiene los archivos necesarios para el despliegue del modelo en Streamlit.
-README.md: Documento que proporciona una visión general del proyecto, incluyendo la descripción del dataset, el proceso de trabajo y los resultados obtenidos.
+**data/**: Carpeta que contiene el dataset original y los datos procesados. Así como, los datos de entrenamiento utilizados para entrenar el modelo, y los datos de test utilizados para evaluar el modelo a partir de los datos procesados.
+**notebooks/**: Carpeta que contiene los notebooks Jupyter utilizados en el proyecto.
+**models/**: Carpeta que contiene los modelos entrenados y el modelo final seleccionado.
+**src/**: Contiene los archivos fuente de Python que implementan las funcionalidades clave del proyecto.
+**app/**: Contiene los archivos necesarios para el despliegue del modelo en Streamlit.
+**README.md**: Documento que proporciona una visión general del proyecto, incluyendo la descripción del dataset, el proceso de trabajo y los resultados obtenidos.
 
 ## Resultados y Conclusiones
 Concluimos que, después de aplicar técnicas de preprocesamiento y selección de características, así como la evaluación de múltiples modelos, hemos desarrollado un modelo de Machine Learning capaz de predecir la danceability de las canciones con una precisión aceptable. Este modelo puede ser útil para diversas aplicaciones, como recomendación de música, análisis de tendencias musicales y más.
