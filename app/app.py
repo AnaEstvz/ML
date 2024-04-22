@@ -105,15 +105,20 @@ elif seleccion == "Predicción":
         'speech_cat_num2': [speech_cat_num2],
         'energy_cat_num2': [energy_cat_num2]
     })
-
+    prediccion = [-1]
     # Hacemos la predicción
     if st.button("Predecir"):
         prediccion = modelo_rf.predict(datos)
 
     # Resultado de la predicción
+    
     st.write("Resultado de la predicción:")
-    if prediccion[0] < 0.5:
+    if prediccion[0] == -1:
+        st.write("Haz tu predicción")
+
+    elif prediccion[0] < 0.5:
         st.write("La canción", nombre_cancion, "tiene poca danceability.")
+        
     else:
         st.write("La canción", nombre_cancion, "tiene mucha danceability.")
 
