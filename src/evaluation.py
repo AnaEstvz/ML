@@ -3,7 +3,7 @@ import pickle
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, confusion_matrix
 
 # Importar el modelo con pickle 
-filename = '../models_class/final_model2.pkl'
+filename = '../models_class/final_model.pkl'
 
 with open(filename, "rb") as archivo_entrada:
     final_model = pickle.load(archivo_entrada)

@@ -139,4 +139,4 @@ music.loc[music['popularity_cat_num'] == 4,"popularity_cat_num2"]=8
 music.dropna(subset=['instance_id'], inplace=True)
 
 # Guardo dataset procesado
-music.to_csv('../data/processed/music_final.csv', index= False)
+music.to_csv('../data/processed/music_final_processed.csv', index= False)

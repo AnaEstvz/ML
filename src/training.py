@@ -7,7 +7,7 @@ from xgboost import XGBClassifier
 from sklearn.model_selection import train_test_split
 
 # Leer csv definitvo con feature engineering
-music = pd.read_csv('../data/processed/music_final_class1.csv')
+music = pd.read_csv('../data/processed/music_final_processed.csv')
 
 # Dividir en train y test
 train_df, test_df = train_test_split(music, test_size=0.20, random_state=42 )
@@ -36,14 +36,14 @@ pipeline = Pipeline(steps)
 
 
 param_dist = {
-    'classifier__n_estimators': [100, 150, 200],
-    'classifier__max_depth': [9, 10, 15],
-    'classifier__learning_rate': [0.04,0.05],
-    'classifier__subsample': [0.8, 0.9],
-    'classifier__colsample_bytree': [0.8, 0.9],
-    'classifier__gamma': [0, 0.1],
-    'classifier__reg_alpha': [0.05, 0.3,0.5],
-    'classifier__reg_lambda': [ 0.3,0.4]
+    'classifier__n_estimators': [200],
+    'classifier__max_depth': [15],
+    'classifier__learning_rate': [0.04],
+    'classifier__subsample': [0.9],
+    'classifier__colsample_bytree': [0.9],
+    'classifier__gamma': [0.1],
+    'classifier__reg_alpha': [0.05],
+    'classifier__reg_lambda': [ 0.3]
 }
 
 
@@ -66,7 +66,7 @@ print("Best Parameters:", best_params)
 print("Best Estimator:", best_estimator)
 
 # Guardar modelo con pickle
-filename = '../models_class/final_model2.pkl'
+filename = '../models_class/final_model.pkl'
 with open(filename, 'wb') as archivo_salida:
     pickle.dump(final_model1, archivo_salida)
 
